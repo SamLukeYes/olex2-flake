@@ -38,12 +38,13 @@ buildFHSUserEnvBubblewrap {
   extraInstallCommands = ''
     cd ${olex2-dropin.src}
 
+    mkdir -p $out/share/pixmaps
+    cp scripts/olex2.xpm $out/share/pixmaps
+
     mkdir -p $out/share/applications
     cp scripts/olex2.desktop $out/share/applications
     substituteInPlace $out/share/applications/olex2.desktop \
-      --replace "/usr/bin/" ""
-
-    mkdir -p $out/share/icons
-    cp scripts/olex2.xpm $out/share/icons
+      --replace "/usr/bin/" "$out/bin/" \
+      --replace "olex2.xpm" "$out/share/pixmaps/olex2.xpm"
   '';
 }
