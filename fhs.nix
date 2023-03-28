@@ -7,7 +7,7 @@
 , olex2-dropin
 , forceX11 ? false
 , targetPkgs ? ps: with ps; [
-    gdk-pixbuf gtk3 libGL libxcrypt mpi openblas
+    gdk-pixbuf gtk3 libGL libxcrypt-legacy mpi openblas
   ]
 }:
 
@@ -15,6 +15,7 @@ buildFHSUserEnvBubblewrap {
   inherit targetPkgs;
   name = "olex2";
   runScript = writeShellScript "olex2-launcher" (''
+    ls /usr/lib
     if [ ! -f ~/olex2/start ]
     then
       ${libnotify}/bin/notify-send "Olex2 Launcher" \
